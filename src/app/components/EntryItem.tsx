@@ -38,7 +38,7 @@ export function EntryItem({ entry, onUpdate, onDelete, availableTags }: EntryIte
         <div className="text-sm text-muted-foreground whitespace-nowrap">{entry.hours} t</div>
       </div>
 
-      <div className="flex gap-1 ml-2">
+      <div className="flex gap-1 ml-2 opacity-0 group-hover:opacity-100 transition-opacity">
         <button
           onClick={onDelete}
           className="p-1.5 hover:bg-destructive hover:text-destructive-foreground rounded-md transition-colors"
