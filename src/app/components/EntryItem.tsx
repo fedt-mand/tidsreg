@@ -32,7 +32,7 @@ export function EntryItem({ entry, onUpdate, onDelete, availableTags }: EntryIte
     <div className="flex items-center justify-between p-2 bg-accent/50 rounded-md group">
       <div className="flex-1 min-w-0 flex items-baseline gap-2">
         <div className="truncate">{entry.tag}</div>
-        <div className="text-sm text-muted-foreground whitespace-nowrap">{entry.hours} timer</div>
+        <div className="text-sm text-muted-foreground whitespace-nowrap">{entry.hours} t</div>
       </div>
 
       <div className="flex gap-1 ml-2 opacity-0 group-hover:opacity-100 transition-opacity">
