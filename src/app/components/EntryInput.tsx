@@ -19,9 +19,14 @@ export function EntryInput({
   const [hours, setHours] = useState(initialHours.toString());
   const [showSuggestions, setShowSuggestions] = useState(false);
   const tagInputRef = useRef<HTMLInputElement>(null);
+  const hoursInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    tagInputRef.current?.focus();
+    if (initialHours && initialHours > 0) {
+      hoursInputRef.current?.focus();
+    } else {
+      tagInputRef.current?.focus();
+    }
   }, []);
 
   const filteredTags = availableTags.filter((t) =>
@@ -80,6 +85,7 @@ export function EntryInput({
       </div>
 
       <input
+        ref={hoursInputRef}
         type="number"
         value={hours}
         onChange={(e) => setHours(e.target.value)}
