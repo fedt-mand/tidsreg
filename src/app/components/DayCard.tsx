@@ -63,7 +63,7 @@ export function DayCard({
       <div className="mt-3 pt-3 border-t border-border">
         <div className="flex justify-between items-center">
           <span className="text-muted-foreground">Total:</span>
-          <span className="font-medium">{dailyTotal.toFixed(1)} timer</span>
+          <span className="font-medium">{dailyTotal.toFixed(1)} t</span>
         </div>
       </div>
     </div>
