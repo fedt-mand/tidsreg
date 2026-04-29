@@ -107,7 +107,7 @@ export default function App() {
           <h1>Tidsregistrering - Uge {new Date().getWeek()}</h1>
           <button
             onClick={() => setShowClearDialog(true)}
-            className="py-2 px-4 bg-destructive hover:bg-destructive/90 text-destructive-foreground rounded-md transition-colors"
+            className="py-2 px-4 bg-destructive hover:bg-destructive/90 text-destructive-foreground rounded-md transition-colors cursor-pointer"
           >
             Ryd uge
           </button>

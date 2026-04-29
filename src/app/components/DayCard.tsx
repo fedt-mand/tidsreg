@@ -54,7 +54,7 @@ export function DayCard({
       ) : (
         <button
           onClick={() => setIsAdding(true)}
-          className="w-full py-2 px-3 bg-secondary hover:bg-secondary/80 text-secondary-foreground rounded-md transition-colors"
+          className="w-full py-2 px-3 bg-secondary hover:bg-secondary/80 text-secondary-foreground rounded-md transition-colors cursor-pointer"
         >
           + Tilføj
         </button>
