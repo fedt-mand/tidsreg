@@ -34,10 +34,10 @@ export function DayCard({
   };
 
   return (
-    <div className="bg-card border border-border rounded-lg p-3 flex flex-col h-full">
-      <h3 className="mb-2">{dayData.day}</h3>
+    <div className="bg-card border border-border rounded-lg p-3 flex flex-col h-full gap-2">
+      <h3>{dayData.day}</h3>
 
-      <div className="flex-1 space-y-1.5 mb-2 overflow-y-auto min-h-0">
+      <div className="flex-1 space-y-1.5 overflow-y-auto min-h-0 border border-border rounded p-2 bg-background/50">
         {dayData.entries.map((entry) => (
           <EntryItem
             key={entry.id}
