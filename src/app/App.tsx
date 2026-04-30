@@ -86,7 +86,7 @@ export default function App() {
   };
 
   const getAllTags = () => {
-    return Array.from(tagHistory);
+    return Array.from(tagHistory).sort((a, b) => a.localeCompare(b, 'da'));
   };
 
   const clearWeek = () => {
