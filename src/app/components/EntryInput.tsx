@@ -63,7 +63,7 @@ export function EntryInput({
           onFocus={() => setShowSuggestions(true)}
           onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
           onKeyDown={handleKeyDown}
-          placeholder={showPlaceholders ? 'Tag (f.eks. Projekt A)' : ''}
+          placeholder={showPlaceholders ? '' : ''}
           className="w-full px-3 py-1.5 bg-input-background border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
         />
 
@@ -101,7 +101,7 @@ export function EntryInput({
       <div className="flex gap-2">
         <button
           onClick={handleSubmit}
-          style={{ backgroundColor: '#5CCB5F' }}
+          style={{ backgroundColor: '#44A447' }}
           className="flex-1 py-1.5 px-3 text-white rounded-md transition-colors hover:opacity-90"
         >
           Gem
