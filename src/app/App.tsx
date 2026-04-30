@@ -93,24 +93,43 @@ export default function App() {
     setWeekData(INITIAL_WEEK_DATA);
   };
 
+  const deleteTag = (tag: string) => {
+    setTagHistory((prev: Set<string>) => {
+      const newSet = new Set(prev);
+      newSet.delete(tag);
+      return newSet;
+    });
+    setTagToDelete(null);
+  };
+
   const totalWeekHours = weekData.reduce(
     (sum: number, day: DayData) => sum + day.entries.reduce((daySum: number, entry: TimeEntry) => daySum + entry.hours, 0),
     0
   );
 
   const [showClearDialog, setShowClearDialog] = useState(false);
+  const [showTagsDialog, setShowTagsDialog] = useState(false);
+  const [tagToDelete, setTagToDelete] = useState<string | null>(null);
 
   return (
     <div className="min-h-screen bg-background p-3 md:p-5">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-4">
           <h1>Tidsregistrering - Uge {new Date().getWeek()}</h1>
-          <button
-            onClick={() => setShowClearDialog(true)}
-            className="py-1.5 px-3 bg-destructive hover:bg-destructive/90 text-destructive-foreground rounded-md transition-colors cursor-pointer"
-          >
-            Ryd uge
-          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setShowTagsDialog(true)}
+              className="py-1.5 px-3 bg-secondary hover:bg-secondary/80 text-secondary-foreground rounded-md transition-colors cursor-pointer"
+            >
+              Tags
+            </button>
+            <button
+              onClick={() => setShowClearDialog(true)}
+              className="py-1.5 px-3 bg-destructive hover:bg-destructive/90 text-destructive-foreground rounded-md transition-colors cursor-pointer"
+            >
+              Ryd uge
+            </button>
+          </div>
         </div>
 
         {showClearDialog && (
@@ -133,6 +152,66 @@ export default function App() {
                 </button>
                 <button
                   onClick={() => setShowClearDialog(false)}
+                  className="flex-1 py-2 px-4 bg-secondary hover:bg-secondary/80 text-secondary-foreground rounded-md transition-colors"
+                >
+                  Annuller
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {showTagsDialog && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+            <div className="bg-card border border-border rounded-lg p-6 max-w-md mx-4 max-h-[80vh] overflow-y-auto">
+              <h2 className="mb-4">Administrer tags</h2>
+              <p className="mb-4 text-muted-foreground">
+                Klik på krydset for at slette et tag. Dette kan ikke fortrydes.
+              </p>
+              <div className="flex flex-wrap gap-2 mb-6">
+                {getAllTags().map((tag) => (
+                  <div
+                    key={tag}
+                    className="flex items-center gap-1 bg-secondary text-secondary-foreground px-3 py-1 rounded-full text-sm"
+                  >
+                    <span>{tag}</span>
+                    <button
+                      onClick={() => setTagToDelete(tag)}
+                      className="text-secondary-foreground hover:text-destructive ml-1"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                ))}
+              </div>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setShowTagsDialog(false)}
+                  className="flex-1 py-2 px-4 bg-secondary hover:bg-secondary/80 text-secondary-foreground rounded-md transition-colors"
+                >
+                  Luk
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {tagToDelete && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+            <div className="bg-card border border-border rounded-lg p-6 max-w-md mx-4">
+              <h2 className="mb-4">Bekræft sletning</h2>
+              <p className="mb-6 text-muted-foreground">
+                Er du sikker på at du vil slette tagget "{tagToDelete}"? Dette kan ikke fortrydes.
+              </p>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => deleteTag(tagToDelete)}
+                  className="flex-1 py-2 px-4 bg-destructive hover:bg-destructive/90 text-destructive-foreground rounded-md transition-colors"
+                >
+                  Ja, slet tag
+                </button>
+                <button
+                  onClick={() => setTagToDelete(null)}
                   className="flex-1 py-2 px-4 bg-secondary hover:bg-secondary/80 text-secondary-foreground rounded-md transition-colors"
                 >
                   Annuller
