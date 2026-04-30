@@ -29,10 +29,10 @@ export function EntryItem({ entry, onUpdate, onDelete, availableTags }: EntryIte
   }
 
   return (
-    <div className="flex items-center justify-between p-2 bg-accent/50 rounded-md group">
+    <div className="flex items-center justify-between p-1.5 bg-accent/50 rounded-md group">
       <div 
         onClick={() => setIsEditing(true)}
-        className="flex-1 min-w-0 flex items-baseline gap-2 cursor-pointer hover:bg-accent/70 p-1 rounded transition-colors"
+        className="flex-1 min-w-0 flex items-baseline gap-2 cursor-pointer hover:bg-accent/70 p-0.5 rounded transition-colors"
       >
         <div className="truncate">{entry.tag}</div>
         <div className="text-sm text-muted-foreground whitespace-nowrap">{entry.hours} t</div>

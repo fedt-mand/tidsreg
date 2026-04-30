@@ -18,6 +18,7 @@ export function EntryInput({
   const [tag, setTag] = useState(initialTag);
   const [hours, setHours] = useState(initialHours.toString());
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [showPlaceholders, setShowPlaceholders] = useState(true);
   const tagInputRef = useRef<HTMLInputElement>(null);
   const hoursInputRef = useRef<HTMLInputElement>(null);
 
@@ -39,6 +40,7 @@ export function EntryInput({
       onSave(tag.trim(), hoursNum);
       setTag('');
       setHours('');
+      setShowPlaceholders(false);
     }
   };
 
@@ -51,7 +53,7 @@ export function EntryInput({
   };
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-1.5">
       <div className="relative">
         <input
           ref={tagInputRef}
@@ -61,8 +63,8 @@ export function EntryInput({
           onFocus={() => setShowSuggestions(true)}
           onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
           onKeyDown={handleKeyDown}
-          placeholder="Tag (f.eks. Projekt A)"
-          className="w-full px-3 py-2 bg-input-background border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
+          placeholder={showPlaceholders ? 'Tag (f.eks. Projekt A)' : ''}
+          className="w-full px-3 py-1.5 bg-input-background border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
         />
 
         {showSuggestions && filteredTags.length > 0 && tag.length > 0 && (
@@ -90,22 +92,23 @@ export function EntryInput({
         value={hours}
         onChange={(e) => setHours(e.target.value)}
         onKeyDown={handleKeyDown}
-        placeholder="Timer"
+        placeholder={showPlaceholders ? 'Timer' : ''}
         step="0.5"
         min="0"
-        className="w-full px-3 py-2 bg-input-background border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
+        className="w-full px-3 py-1.5 bg-input-background border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
       />
 
       <div className="flex gap-2">
         <button
           onClick={handleSubmit}
-          className="flex-1 py-2 px-3 bg-primary hover:bg-primary/90 text-primary-foreground rounded-md transition-colors"
+          style={{ backgroundColor: '#5CCB5F' }}
+          className="flex-1 py-1.5 px-3 text-white rounded-md transition-colors hover:opacity-90"
         >
           Gem
         </button>
         <button
           onClick={onCancel}
-          className="flex-1 py-2 px-3 bg-secondary hover:bg-secondary/80 text-secondary-foreground rounded-md transition-colors"
+          className="flex-1 py-1.5 px-3 bg-secondary hover:bg-secondary/80 text-secondary-foreground rounded-md transition-colors"
         >
           Annuller
         </button>

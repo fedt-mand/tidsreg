@@ -30,10 +30,10 @@ export function DayCard({
   };
 
   return (
-    <div className="bg-card border border-border rounded-lg p-4 flex flex-col h-full">
-      <h3 className="mb-3">{dayData.day}</h3>
+    <div className="bg-card border border-border rounded-lg p-3 flex flex-col h-full">
+      <h3 className="mb-2">{dayData.day}</h3>
 
-      <div className="flex-1 space-y-2 mb-3">
+      <div className="flex-1 space-y-1.5 mb-2">
         {dayData.entries.map((entry) => (
           <EntryItem
             key={entry.id}
@@ -54,13 +54,14 @@ export function DayCard({
       ) : (
         <button
           onClick={() => setIsAdding(true)}
-          className="w-full py-2 px-3 bg-secondary hover:bg-secondary/80 text-secondary-foreground rounded-md transition-colors cursor-pointer"
+          style={{ backgroundColor: '#8EED90' }}
+          className="w-full py-1.5 px-3 text-black rounded-md transition-colors hover:opacity-90 cursor-pointer"
         >
           + Tilføj
         </button>
       )}
 
-      <div className="mt-3 pt-3 border-t border-border">
+      <div className="mt-2 pt-2 border-t border-border">
         <div className="flex justify-between items-center">
           <span className="text-muted-foreground">Total:</span>
           <span className="font-medium">{dailyTotal.toFixed(1)} t</span>

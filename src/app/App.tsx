@@ -101,13 +101,13 @@ export default function App() {
   const [showClearDialog, setShowClearDialog] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background p-4 md:p-8">
+    <div className="min-h-screen bg-background p-3 md:p-5">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex justify-between items-center mb-4">
           <h1>Tidsregistrering - Uge {new Date().getWeek()}</h1>
           <button
             onClick={() => setShowClearDialog(true)}
-            className="py-2 px-4 bg-destructive hover:bg-destructive/90 text-destructive-foreground rounded-md transition-colors cursor-pointer"
+            className="py-1.5 px-3 bg-destructive hover:bg-destructive/90 text-destructive-foreground rounded-md transition-colors cursor-pointer"
           >
             Ryd uge
           </button>
