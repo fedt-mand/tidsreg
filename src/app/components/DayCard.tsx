@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TimeEntry, DayData } from '../App.tsx';
+import { DayData } from '../App.tsx';
 import { EntryInput } from './EntryInput.tsx';
 import { EntryItem } from './EntryItem.tsx';
 
@@ -10,6 +10,8 @@ interface DayCardProps {
   onUpdateEntry: (dayIndex: number, entryId: string, tag: string, hours: number) => void;
   onDeleteEntry: (dayIndex: number, entryId: string) => void;
   availableTags: string[];
+  hoveredTag: string | null;
+  setHoveredTag: (tag: string | null) => void;
 }
 
 export function DayCard({
@@ -19,6 +21,8 @@ export function DayCard({
   onUpdateEntry,
   onDeleteEntry,
   availableTags,
+  hoveredTag,
+  setHoveredTag,
 }: DayCardProps) {
   const [isAdding, setIsAdding] = useState(false);
 
@@ -41,6 +45,8 @@ export function DayCard({
             onUpdate={(tag: string, hours: number) => onUpdateEntry(dayIndex, entry.id, tag, hours)}
             onDelete={() => onDeleteEntry(dayIndex, entry.id)}
             availableTags={availableTags}
+            hoveredTag={hoveredTag}
+            setHoveredTag={setHoveredTag}
           />
         ))}
       </div>

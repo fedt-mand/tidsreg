@@ -8,9 +8,11 @@ interface EntryItemProps {
   onUpdate: (tag: string, hours: number) => void;
   onDelete: () => void;
   availableTags: string[];
+  hoveredTag: string | null;
+  setHoveredTag: (tag: string | null) => void;
 }
 
-export function EntryItem({ entry, onUpdate, onDelete, availableTags }: EntryItemProps) {
+export function EntryItem({ entry, onUpdate, onDelete, availableTags, hoveredTag, setHoveredTag }: EntryItemProps) {
   const [isEditing, setIsEditing] = useState(false);
 
   if (isEditing) {
@@ -29,7 +31,12 @@ export function EntryItem({ entry, onUpdate, onDelete, availableTags }: EntryIte
   }
 
   return (
-    <div className="flex items-center justify-between p-1.5 bg-accent/50 rounded-md group">
+    <div 
+      className="flex items-center justify-between p-1.5 bg-accent/50 rounded-md group"
+      style={{ backgroundColor: hoveredTag === entry.tag ? '#D3D3D3' : undefined }}
+      onMouseEnter={() => setHoveredTag(entry.tag)}
+      onMouseLeave={() => setHoveredTag(null)}
+    >
       <div 
         onClick={() => setIsEditing(true)}
         className="flex-1 min-w-0 flex items-baseline gap-2 cursor-pointer hover:bg-accent/70 p-0.5 rounded transition-colors"

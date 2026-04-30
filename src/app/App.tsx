@@ -32,6 +32,8 @@ export default function App() {
     return saved ? new Set(JSON.parse(saved)) : new Set();
   });
 
+  const [hoveredTag, setHoveredTag] = useState<string | null>(null);
+
   useEffect(() => {
     localStorage.setItem('timetrack-weekdata', JSON.stringify(weekData));
   }, [weekData]);
@@ -231,6 +233,8 @@ export default function App() {
               onUpdateEntry={updateEntry}
               onDeleteEntry={deleteEntry}
               availableTags={getAllTags()}
+              hoveredTag={hoveredTag}
+              setHoveredTag={setHoveredTag}
             />
           ))}
         </div>
