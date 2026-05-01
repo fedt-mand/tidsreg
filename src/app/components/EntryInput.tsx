@@ -54,7 +54,7 @@ export function EntryInput({
 
   return (
     <div className="space-y-1.5">
-      <div className="relative">
+      <div>
         <input
           ref={tagInputRef}
           type="text"
@@ -68,7 +68,7 @@ export function EntryInput({
         />
 
         {showSuggestions && filteredTags.length > 0 && tag.length > 0 && (
-          <div className="absolute z-50 w-full top-full mt-1 bg-popover border border-border rounded-md shadow-lg max-h-40 overflow-y-auto">
+          <div className="w-full mt-1 bg-popover border border-border rounded-md shadow-lg max-h-40 overflow-y-auto">
             {filteredTags.map((t) => (
               <button
                 key={t}
