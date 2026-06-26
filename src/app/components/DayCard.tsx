@@ -9,6 +9,7 @@ interface DayCardProps {
   onAddEntry: (dayIndex: number, tag: string, hours: number) => void;
   onUpdateEntry: (dayIndex: number, entryId: string, tag: string, hours: number) => void;
   onDeleteEntry: (dayIndex: number, entryId: string) => void;
+  onTogglePinEntry: (dayIndex: number, entryId: string) => void;
   availableTags: string[];
   hoveredTag: string | null;
   setHoveredTag: (tag: string | null) => void;
@@ -20,6 +21,7 @@ export function DayCard({
   onAddEntry,
   onUpdateEntry,
   onDeleteEntry,
+  onTogglePinEntry,
   availableTags,
   hoveredTag,
   setHoveredTag,
@@ -44,6 +46,7 @@ export function DayCard({
             entry={entry}
             onUpdate={(tag: string, hours: number) => onUpdateEntry(dayIndex, entry.id, tag, hours)}
             onDelete={() => onDeleteEntry(dayIndex, entry.id)}
+            onTogglePin={() => onTogglePinEntry(dayIndex, entry.id)}
             availableTags={availableTags}
             hoveredTag={hoveredTag}
             setHoveredTag={setHoveredTag}

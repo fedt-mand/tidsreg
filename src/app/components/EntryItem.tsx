@@ -1,18 +1,19 @@
 import { useState } from 'react';
 import { TimeEntry } from '../App.tsx';
 import { EntryInput } from './EntryInput.tsx';
-import { Trash2 } from 'lucide-react';
+import { Pin, PinOff, Trash2 } from 'lucide-react';
 
 interface EntryItemProps {
   entry: TimeEntry;
   onUpdate: (tag: string, hours: number) => void;
   onDelete: () => void;
+  onTogglePin: () => void;
   availableTags: string[];
   hoveredTag: string | null;
   setHoveredTag: (tag: string | null) => void;
 }
 
-export function EntryItem({ entry, onUpdate, onDelete, availableTags, hoveredTag, setHoveredTag }: EntryItemProps) {
+export function EntryItem({ entry, onUpdate, onDelete, onTogglePin, availableTags, hoveredTag, setHoveredTag }: EntryItemProps) {
   const [isEditing, setIsEditing] = useState(false);
 
   if (isEditing) {
@@ -46,6 +47,14 @@ export function EntryItem({ entry, onUpdate, onDelete, availableTags, hoveredTag
       </div>
 
       <div className="flex gap-1 ml-2 opacity-0 group-hover:opacity-100 transition-opacity">
+        <button
+          onClick={onTogglePin}
+          className={`p-1.5 rounded-md transition-colors ${entry.pinned ? 'bg-amber-200 text-amber-800' : 'hover:bg-accent'}`}
+          title={entry.pinned ? 'Fjern fastgørelse' : 'Fastgør'}
+          aria-label={entry.pinned ? 'Fjern fastgørelse' : 'Fastgør'}
+        >
+          {entry.pinned ? <PinOff size={16} /> : <Pin size={16} />}
+        </button>
         <button
           onClick={onDelete}
           className="p-1.5 hover:bg-destructive hover:text-destructive-foreground rounded-md transition-colors"

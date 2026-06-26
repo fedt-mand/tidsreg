@@ -6,6 +6,7 @@ export interface TimeEntry {
   id: string;
   tag: string;
   hours: number;
+  pinned?: boolean;
 }
 
 export interface DayData {
@@ -47,6 +48,7 @@ export default function App() {
       id: `${Date.now()}-${Math.random()}`,
       tag,
       hours,
+      pinned: false,
     };
 
     setTagHistory((prev: Set<string>) => new Set([...prev, tag]));
@@ -76,6 +78,19 @@ export default function App() {
     });
   };
 
+  const togglePinEntry = (dayIndex: number, entryId: string) => {
+    setWeekData((prev: DayData[]) => {
+      const updated = [...prev];
+      updated[dayIndex] = {
+        ...updated[dayIndex],
+        entries: updated[dayIndex].entries.map((entry: TimeEntry) =>
+          entry.id === entryId ? { ...entry, pinned: !entry.pinned } : entry
+        ),
+      };
+      return updated;
+    });
+  };
+
   const deleteEntry = (dayIndex: number, entryId: string) => {
     setWeekData((prev: DayData[]) => {
       const updated = [...prev];
@@ -92,7 +107,12 @@ export default function App() {
   };
 
   const clearWeek = () => {
-    setWeekData(INITIAL_WEEK_DATA);
+    setWeekData((prev: DayData[]) =>
+      prev.map((day: DayData) => ({
+        ...day,
+        entries: day.entries.filter((entry: TimeEntry) => entry.pinned),
+      }))
+    );
   };
 
   const deleteTag = (tag: string) => {
@@ -140,7 +160,7 @@ export default function App() {
               <h2 className="mb-4">Bekræft rydning</h2>
               <p className="mb-6 text-muted-foreground">
                 Er du sikker på at du vil rydde alle tidsregistreringer for denne uge?
-                Dine tidligere brugte tags bliver gemt.
+                Fastgjorte registreringer bevares, og dine tidligere brugte tags bliver gemt.
               </p>
               <div className="flex gap-3">
                 <button
@@ -232,6 +252,7 @@ export default function App() {
               onAddEntry={addEntry}
               onUpdateEntry={updateEntry}
               onDeleteEntry={deleteEntry}
+              onTogglePinEntry={togglePinEntry}
               availableTags={getAllTags()}
               hoveredTag={hoveredTag}
               setHoveredTag={setHoveredTag}
