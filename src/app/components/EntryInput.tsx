@@ -1,10 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
+import { Pin, PinOff } from 'lucide-react';
 
 interface EntryInputProps {
   initialTag?: string;
   initialHours?: number;
   onSave: (tag: string, hours: number) => void;
   onCancel: () => void;
+  onTogglePin?: () => void;
+  pinned?: boolean;
   availableTags: string[];
 }
 
@@ -13,6 +16,8 @@ export function EntryInput({
   initialHours = 0,
   onSave,
   onCancel,
+  onTogglePin,
+  pinned = false,
   availableTags,
 }: EntryInputProps) {
   const [tag, setTag] = useState(initialTag);
@@ -99,6 +104,17 @@ export function EntryInput({
       />
 
       <div className="flex gap-2">
+        {onTogglePin && (
+          <button
+            type="button"
+            onClick={onTogglePin}
+            className={`p-1.5 rounded-md transition-colors ${pinned ? 'bg-amber-200 text-amber-800' : 'bg-secondary hover:bg-secondary/80 text-secondary-foreground'}`}
+            title={pinned ? 'Fjern fastgørelse' : 'Fastgør'}
+            aria-label={pinned ? 'Fjern fastgørelse' : 'Fastgør'}
+          >
+            {pinned ? <PinOff size={16} /> : <Pin size={16} />}
+          </button>
+        )}
         <button
           onClick={handleSubmit}
           style={{ backgroundColor: '#44A447' }}

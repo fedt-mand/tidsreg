@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { TimeEntry } from '../App.tsx';
 import { EntryInput } from './EntryInput.tsx';
-import { Pin, PinOff, Trash2 } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 
 interface EntryItemProps {
   entry: TimeEntry;
@@ -26,6 +26,8 @@ export function EntryItem({ entry, onUpdate, onDelete, onTogglePin, availableTag
           setIsEditing(false);
         }}
         onCancel={() => setIsEditing(false)}
+        onTogglePin={onTogglePin}
+        pinned={entry.pinned}
         availableTags={availableTags}
       />
     );
@@ -47,14 +49,6 @@ export function EntryItem({ entry, onUpdate, onDelete, onTogglePin, availableTag
       </div>
 
       <div className="flex gap-1 ml-2 opacity-0 group-hover:opacity-100 transition-opacity">
-        <button
-          onClick={onTogglePin}
-          className={`p-1.5 rounded-md transition-colors ${entry.pinned ? 'bg-amber-200 text-amber-800' : 'hover:bg-accent'}`}
-          title={entry.pinned ? 'Fjern fastgørelse' : 'Fastgør'}
-          aria-label={entry.pinned ? 'Fjern fastgørelse' : 'Fastgør'}
-        >
-          {entry.pinned ? <PinOff size={16} /> : <Pin size={16} />}
-        </button>
         <button
           onClick={onDelete}
           className="p-1.5 hover:bg-destructive hover:text-destructive-foreground rounded-md transition-colors"
