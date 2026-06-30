@@ -41,7 +41,7 @@ export function EntryInput({
 
   const handleSubmit = () => {
     const hoursNum = parseFloat(hours);
-    if (tag.trim() && !isNaN(hoursNum) && hoursNum > 0) {
+    if (tag.trim() && !isNaN(hoursNum) && hoursNum >= 0) {
       onSave(tag.trim(), hoursNum);
       setTag('');
       setHours('');

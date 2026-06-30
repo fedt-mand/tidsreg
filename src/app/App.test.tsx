@@ -7,6 +7,17 @@ describe('weekly reset', () => {
     localStorage.clear();
   });
 
+  it('allows saving an entry with 0 hours', () => {
+    render(<App />);
+
+    fireEvent.click(screen.getAllByRole('button', { name: /tilføj/i })[0]);
+    fireEvent.change(screen.getAllByRole('textbox')[0], { target: { value: 'Løb' } });
+    fireEvent.change(screen.getAllByRole('spinbutton')[0], { target: { value: '0' } });
+    fireEvent.click(screen.getByRole('button', { name: /gem/i }));
+
+    expect(screen.getByText('Løb')).toBeInTheDocument();
+  });
+
   it('keeps pinned entries when clearing the week', () => {
     render(<App />);
 
