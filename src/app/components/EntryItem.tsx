@@ -44,7 +44,7 @@ export function EntryItem({ entry, onUpdate, onDelete, onTogglePin, availableTag
         onClick={() => setIsEditing(true)}
         className="flex-1 min-w-0 flex items-baseline gap-2 cursor-pointer hover:bg-accent/70 p-0.5 rounded transition-colors"
       >
-        <div className="truncate">{entry.tag}</div>
+        <div className={`truncate ${entry.hours === 0 ? 'line-through' : ''}`}>{entry.tag}</div>
         <div className="text-sm text-muted-foreground whitespace-nowrap">{entry.hours} t</div>
       </div>
 

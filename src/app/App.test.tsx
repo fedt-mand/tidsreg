@@ -16,6 +16,7 @@ describe('weekly reset', () => {
     fireEvent.click(screen.getByRole('button', { name: /gem/i }));
 
     expect(screen.getByText('Løb')).toBeInTheDocument();
+    expect(screen.getByText('Løb')).toHaveClass('line-through');
   });
 
   it('keeps pinned entries when clearing the week', () => {
