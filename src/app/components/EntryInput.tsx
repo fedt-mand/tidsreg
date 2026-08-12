@@ -28,12 +28,14 @@ export function EntryInput({
   const hoursInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (initialHours && initialHours > 0) {
+    if (initialTag) {
+      // Editing an existing entry - focus on hours
       hoursInputRef.current?.focus();
     } else {
+      // Creating a new entry - focus on tag
       tagInputRef.current?.focus();
     }
-  }, []);
+  }, [initialTag]);
 
   const filteredTags = availableTags.filter((t) =>
     t.toLowerCase().includes(tag.toLowerCase())
