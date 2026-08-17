@@ -110,10 +110,7 @@ export default function App() {
     setWeekData((prev: DayData[]) =>
       prev.map((day: DayData) => ({
         ...day,
-        entries: day.entries.map((entry: TimeEntry) => ({
-          ...entry,
-          hours: 0,
-        })),
+        entries: day.entries.filter((entry: TimeEntry) => entry.pinned),
       }))
     );
   };
