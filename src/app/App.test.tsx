@@ -19,7 +19,7 @@ describe('weekly reset', () => {
     expect(screen.getByText('Løb')).toHaveClass('line-through');
   });
 
-  it('removes unpinned entries and keeps pinned entries when clearing the week', () => {
+  it('removes unpinned entries and keeps pinned entries at 0 hours when clearing the week', () => {
     render(<App />);
 
     fireEvent.click(screen.getAllByRole('button', { name: /tilføj/i })[0]);
@@ -40,7 +40,7 @@ describe('weekly reset', () => {
     fireEvent.click(screen.getByRole('button', { name: /ja, ryd ugen/i }));
 
     expect(screen.getByText('Løb')).toBeInTheDocument();
-    expect(screen.getByText('2 t')).toBeInTheDocument();
+    expect(screen.getByText('0 t')).toBeInTheDocument();
     expect(screen.queryByText('Middag')).not.toBeInTheDocument();
   });
 });
